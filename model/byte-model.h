@@ -21,9 +21,9 @@ public:
       }
     }
 
-    byte_model(const std::vector<char> &symbols, const std::vector<math_t> &frequencies) {
+    byte_model(const std::vector<std::byte> &symbols, const std::vector<math_t> &frequencies) {
       for (size_t i = 0; i < symbols.size(); ++i) {
-        add(static_cast<math_t>(symbols[i]) + 1, frequencies[i]);
+        add(std::to_integer<math_t>(symbols[i]) + 1, frequencies[i]);
       }
     }
 

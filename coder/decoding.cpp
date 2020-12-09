@@ -22,13 +22,12 @@ std::vector<math_t> decode_frequencies(arithmetic_decoder &decoder, math_t file_
   return res;
 }
 
-std::vector<char> decode_letters(arithmetic_decoder &decoder, size_t cnt) {
-  std::vector<char> res(cnt);
+std::vector<std::byte> decode_letters(arithmetic_decoder &decoder, size_t cnt) {
+  std::vector<std::byte> res(cnt);
   byte_model cur_model{};
   for (size_t i = 0; i < cnt; ++i) {
     math_t raw_symbol = decoder.decode(cur_model, false);
-    auto symbol = static_cast<char>(raw_symbol);
-    res[i] = symbol;
+    res[i] = static_cast<std::byte>(raw_symbol);
   }
   return res;
 }
@@ -36,8 +35,7 @@ std::vector<char> decode_letters(arithmetic_decoder &decoder, size_t cnt) {
 void decode_text(arithmetic_decoder &decoder, byte_model &text_model, math_t text_size, std::ostream &output) {
   for (math_t i = 0; i < text_size; ++i) {
     math_t raw_symbol = decoder.decode(text_model, i == (text_size - 1));
-    auto symbol = static_cast<char>(raw_symbol);
-    output.put(symbol);
+    output.put(static_cast<char>(raw_symbol));
   }
 }
 

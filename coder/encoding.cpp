@@ -22,7 +22,7 @@ math_t get_stream_size(std::istream &in) {
 std::vector<std::pair<math_t, math_t>> count_frequencies(std::istream &in) {
   std::array<math_t, 256> frequencies{};
   for (auto raw_byte = in.get(); raw_byte != std::char_traits<char>::eof(); raw_byte = in.get()) {
-    char char_byte = raw_byte;
+    unsigned char char_byte = raw_byte;
     ++frequencies[char_byte];
   }
   std::vector<std::pair<math_t, math_t>> res;
@@ -57,7 +57,7 @@ void encode_letters(arithmetic_encoder &encoder, const std::vector<std::pair<mat
 
 void encode_text(arithmetic_encoder &encoder, byte_model &text_model, std::istream &text) {
   for (auto raw_byte = text.get(); raw_byte != std::char_traits<char>::eof(); raw_byte = text.get()) {
-    char char_byte = raw_byte;
+    unsigned char char_byte = raw_byte;
     encoder.encode(char_byte, text_model);
   }
 }
